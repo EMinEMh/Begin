@@ -130,6 +130,28 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+# FileSystemFinder查找STATICFILES_DIR，AppDirectoriesFinder查找注册的app
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # other
+    # 'compressor.finders.CompressorFinder',
+)
+
 STATIC_URL = '/static/'
 
+STATICFILES_DIR = [
+    os.path.join(BASE_DIR, 'static')
+]
+
 AUTH_USER_MODEL = 'accounts.BlogUser'
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates')
+        ],
+        'APP_DIRS': True,
+    }
+]
