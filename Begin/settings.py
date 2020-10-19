@@ -181,3 +181,12 @@ TEMPLATES = [
         },
     }
 ]
+
+# 缓存 使用本地内存缓存
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+        'TIMEOUT': 10800,
+    }
+}
