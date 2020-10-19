@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'accounts',
+    'compressor'
 ]
 
 MIDDLEWARE = [
@@ -135,13 +136,29 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     # other
-    # 'compressor.finders.CompressorFinder',
+    'compressor.finders.CompressorFinder',
 )
 
 STATIC_URL = '/static/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'collectedstatic')
+
 STATICFILES_DIR = [
     os.path.join(BASE_DIR, 'static')
+]
+
+COMPRESS_ENABLED = True
+# COMPRESS_OFFLINE = True
+
+
+COMPRESS_CSS_FILTERS = [
+    # creates absolute urls from relative ones
+    'compressor.filters.css_default.CssAbsoluteFilter',
+    # css minimizer
+    'compressor.filters.cssmin.CSSMinFilter'
+]
+COMPRESS_JS_FILTERS = [
+    'compressor.filters.jsmin.JSMinFilter'
 ]
 
 AUTH_USER_MODEL = 'accounts.BlogUser'
@@ -153,5 +170,14 @@ TEMPLATES = [
             os.path.join(BASE_DIR, 'templates')
         ],
         'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+                'blog.context_processors.seo_processor'
+            ],
+        },
     }
 ]
