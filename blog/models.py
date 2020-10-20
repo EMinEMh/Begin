@@ -7,6 +7,14 @@ from django.db import models
 from django.utils.timezone import now
 
 
+class LinkShowType(models.TextChoices):
+    I = ('i', '首页')
+    L = ('l', '列表页')
+    P = ('p', '文章页面')
+    A = ('a', '全站')
+    S = ('s', '友情链接页面')
+
+
 class BaseModel(models.Model):
     id = models.AutoField(primary_key=True)
     create_time = models.DateTimeField('创建时间',default=now)
@@ -86,15 +94,6 @@ class Tag(BaseModel):
         verbose_name = '标签'
         verbose_name_plural = verbose_name
 
-
-
-
-class LinkShowType(models.TextChoices):
-    I = ('i', '首页')
-    L = ('l', '列表页')
-    P = ('p', '文章页面')
-    A = ('a', '全站')
-    S = ('s', '友情链接页面')
 
 
 class Link(models.Model):

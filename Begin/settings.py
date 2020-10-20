@@ -176,7 +176,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'blog.context_processors.seo_processor'
+                # 'blog.context_processors.seo_processor'
             ],
         },
     }
@@ -190,3 +190,6 @@ CACHES = {
         'TIMEOUT': 10800,
     }
 }
+
+# 页面内容个数 paginate
+PAGINATE_BY = 10
